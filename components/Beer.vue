@@ -11,7 +11,9 @@
     </div>
   </BeerItem>
 </template>
-<script>
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import styled from 'vue-styled-components'
 
 const BeerItem = styled.div`
@@ -38,17 +40,23 @@ const BeerItem = styled.div`
   }
 `
 
-export default {
+@Component({
   components: {
     BeerItem
   },
   props: {
-    beer: {
-      type: Object,
-      default: function() {
-        return { name: 'name' }
-      }
-    }
+    beer: Object
+  }
+})
+export default class Beer extends Vue {
+  testFunction(name: string): string {
+    /* eslint-disable no-console */
+    console.log(name)
+    return name
+  }
+
+  mounted() {
+    this.testFunction('name')
   }
 }
 </script>
